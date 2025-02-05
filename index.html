@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Holiday Himalaya - Smart Tour & Travel Bookings</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Navigation Bar */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 1000;
+    }
+
+    nav .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    nav .search-bar {
+      padding: 5px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .hero .tagline {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .hero .btn {
+      padding: 10px 20px;
+      background: #ff6f61;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* Featured Packages Section */
+    .packages {
+      padding: 50px 20px;
+      background: #f9f9f9;
+      text-align: center;
+    }
+
+    .packages h2 {
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+
+    .package-cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .package-card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      width: 300px;
+      margin: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .package-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .package-card h3 {
+      font-size: 24px;
+      margin: 15px 0;
+    }
+
+    .package-card p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    /* Chatbot Section */
+    .chatbot {
+      padding: 50px 20px;
+      background: #e0f7fa;
+      text-align: center;
+    }
+
+    .chatbot h2 {
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+
+    .chatbot .btn {
+      padding: 10px 20px;
+      background: #00796b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* Customer Experience Section */
+    .testimonials {
+      padding: 50px 20px;
+      background: #fff3e0;
+      text-align: center;
+    }
+
+    .testimonials h2 {
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+
+    .testimonial-cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .testimonial-card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      width: 300px;
+      margin: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-card h3 {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+
+    .testimonial-card p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    .testimonial-card .rating {
+      color: #ff9800;
+      font-size: 18px;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    footer ul li {
+      margin: 0 15px;
+    }
+
+    footer ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer .btn {
+      padding: 10px 20px;
+      background: #ff6f61;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+    }
+
+    .modal-content input,
+    .modal-content textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .modal-content .btn {
+      padding: 10px 20px;
+      background: #00796b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo">Holiday Himalaya</div>
+    <ul>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#chatbot">Chatbot</a></li>
+      <li><a href="#testimonials">Customer Experience</a></li>
+      <li><a href="#footer">Contact Us</a></li>
+    </ul>
+    <input type="text" class="search-bar" placeholder="Search...">
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <video autoplay muted loop>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div>
+      <h1>Welcome to Holiday Himalaya</h1>
+      <div class="tagline">Explore New Places</div>
+      <button class="btn">Book Now</button>
+    </div>
+  </section>
+
+  <!-- Featured Packages Section -->
+  <section id="packages" class="packages">
+    <h2>Featured Packages</h2>
+    <div class="package-cards">
+      <div class="package-card">
+        <img src="https://via.placeholder.com/300" alt="Package Image">
+        <h3>Everest Base Camp</h3>
+        <p>Best Season: Spring</p>
+        <p>Experience the thrill of trekking to the base of the world's highest peak.</p>
+      </div>
+      <div class="package-card">
+        <img src="https://via.placeholder.com/300" alt="Package Image">
+        <h3>Annapurna Circuit</h3>
+        <p>Best Season: Autumn</p>
+        <p>A classic trek through diverse landscapes and cultures.</p>
+      </div>
+      <div class="package-card">
+        <img src="https://via.placeholder.com/300" alt="Package Image">
+        <h3>Langtang Valley</h3>
+        <p>Best Season: Spring</p>
+        <p>Discover the beauty of the Langtang region.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chatbot Section -->
+  <section id="chatbot" class="chatbot">
+    <h2>Plan Your Journey</h2>
+    <button class="btn">Start Chatting</button>
+  </section>
+
+  <!-- Customer Experience Section -->
+  <section id="testimonials" class="testimonials">
+    <h2>Customer Experiences</h2>
+    <div class="testimonial-cards">
+      <div class="testimonial-card">
+        <img src="https://via.placeholder.com/100" alt="Client Photo">
+        <h3>John Doe</h3>
+        <p>"Amazing experience with Holiday Himalaya!"</p>
+        <div class="rating">★★★★★</div>
+      </div>
+      <div class="testimonial-card">
+        <img src="https://via.placeholder.com/100" alt="Client Photo">
+        <h3>Jane Smith</h3>
+        <p>"Highly recommended for adventure lovers."</p>
+        <div class="rating">★★★★☆</div>
+      </div>
+      <div class="testimonial-card">
+        <img src="https://via.placeholder.com/100" alt="Client Photo">
+        <h3>Alice Johnson</h3>
+        <p>"Great service and support."</p>
+        <div class="rating">★★★★★</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <ul>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">FAQ</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+    </ul>
+    <button class="btn" onclick="openModal()">Contact Us</button>
+  </footer>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <h2>Contact Us</h2>
+      <input type="text" placeholder="Your Name">
+      <input type="email" placeholder="Your Email">
+      <textarea placeholder="Your Message"></textarea>
+      <button class="btn" onclick="closeModal()">Submit</button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Dynamic Tagline
+    const taglines = ["Explore New Places", "Discover New Adventure", "Travel Your Dream Places"];
+    let currentTagline = 0;
+    const taglineElement = document.querySelector('.tagline');
+
+    function updateTagline() {
+      taglineElement.textContent = taglines[currentTagline];
+      currentTagline = (currentTagline + 1) % taglines.length;
+    }
+
+    setInterval(updateTagline, 3000);
+
+    // Modal Functions
+    function openModal() {
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
